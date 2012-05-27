@@ -1,11 +1,13 @@
 /*!
  * jQuery Mobile Carousel
  * Source: https://github.com/blackdynamo/jQuery-Mobile-Carousel
+ * This fork: https://github.com/aminariana/jQuery-Mobile-Carousel
  * Demo: http://jsfiddle.net/blackdynamo/yxhzU/
  * Blog: http://developingwithstyle.blogspot.com
  *
  * Copyright 2010, Donnovan Lewis
  * Edits: Benjamin Gleitzman (gleitz@mit.edu)
+ * Edits: Amin Ariana (amin@aminariana.com) May 2012
  * Licensed under the MIT
  */
 
@@ -42,19 +44,27 @@
             var currentPage = 1, start, stop;
             if (settings.direction.toLowerCase() === "horizontal") {
                 list.css({float: "left"});
+
+                var maxPageHeight = 0;
                 $.each(pages, function(i) {
                     var li = $("<li>")
                             .css($.extend(listItemCss, {float: "left"}))
                             .html($(this).html());
                     list.append(li);
+                    
+                    //Amin hack
+                    var pageHeight = $(this).height();
+                    if(pageHeight > maxPageHeight)
+                         maxPageHeight = pageHeight;
                 });
+                container.css({height: maxPageHeight})
 
                 list.draggable({
                     axis: "x",
                     start: function(event) {
                         settings.beforeStart.apply(list, arguments);
 
-                        var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event;
+                        var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event.originalEvent;
                         start = {
                             coords: [ data.pageX, data.pageY ]
                         };
@@ -64,7 +74,7 @@
                     stop: function(event) {
                         settings.beforeStop.apply(list, arguments);
 
-                        var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event;
+                        var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event.originalEvent;
                         stop = {
                             coords: [ data.pageX, data.pageY ]
                         };
@@ -115,7 +125,7 @@
                     start: function(event) {
                         settings.beforeStart.apply(list, arguments);
 
-                        var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event;
+                        var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event.originalEvent;
                         start = {
                             coords: [ data.pageX, data.pageY ]
                         };
@@ -125,7 +135,7 @@
                     stop: function(event) {
                         settings.beforeStop.apply(list, arguments);
 
-                        var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event;
+                        var data = event.originalEvent.touches ? event.originalEvent.touches[0] : event.originalEvent;
                         stop = {
                             coords: [ data.pageX, data.pageY ]
                         };

@@ -1,6 +1,14 @@
-You must use the jquery.ui.ipad.js plugin in order for jQuery UI widgets to recognize mobile touch events as click events.
+Original, now alternative: You must use the jquery.ui.ipad.js plugin in order for jQuery UI widgets to recognize mobile touch events as click events.
 
-Demo: http://jsfiddle.net/blackdynamo/yxhzU/
++ Added by Amin Ariana: I have tested this code with jQuery Touch Punch and jQuery Mobile, and it works well. No need for the above ipad.js. Before my fork, it didn't work stably on Touch devices, and it had a strange height problem, and I've tried to improve on both of those issues. It's working correctly in iOS emulator and Android OS 2 and 4. Make sure you have the latest version of both above dependencies. The former depends on jQuery UI core:
+https://github.com/furf/jquery-ui-touch-punch/
+
+
+Original Demo: http://jsfiddle.net/blackdynamo/yxhzU/
+
++ Fixes by Amin Ariana in this fork on May 26, 2012:
+1. Fix for transitions to work correctly when using in a Touch device. Tested on both iOS and Android and it works: Before this fix, after drag and drop, the list item would stay where you left it and wouldn't animate transition all the way due to losing the event argument.
+2. In horizontal mode, when swiping, the code will now detect the proper height of the Carousel by setting the height of the Carousel container to be the height of the item in the list with the maximum height.
 
 Available options:
 
