@@ -6,9 +6,17 @@ https://github.com/furf/jquery-ui-touch-punch/
 
 Original Demo: http://jsfiddle.net/blackdynamo/yxhzU/
 
-+ Fixes by Amin Ariana in this fork on May 26, 2012:
+<Fixes by="Amin Ariana in this fork">
++ on May 28, 2012:
+Fixed the problem where readjusting browser size on web or changing Mobile orientation would destroy the look of the Carousel. Completely overhauled the way Horizontal Carousel deals with calculating the width and height of items so that no fixed inline styles are used. Everything is either handled as percentages or calculated in real-time during jQuery event-handling. The result is that the Carousel will self-adjust when the width of the parent (or browser) changes, both in Mobile and on the Web.
+
+Note: I did not fix this for vertical swiping, and may do that later.
+
++ on May 26, 2012:
 1. Fix for transitions to work correctly when using in a Touch device. Tested on both iOS and Android and it works: Before this fix, after drag and drop, the list item would stay where you left it and wouldn't animate transition all the way due to losing the event argument.
 2. In horizontal mode, when swiping, the code will now detect the proper height of the Carousel by setting the height of the Carousel container to be the height of the item in the list with the maximum height.
+</Fixes>
+
 
 Available options:
 

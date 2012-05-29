@@ -34,25 +34,24 @@
             var height = originalList.parent().height();
 
             //Css
-            var containerCss = {position: "relative", overflow: "hidden", width: width, height: height};
-            var listCss = {position: "relative", padding: "0", margin: "0", listStyle: "none", width: pages.length * width};
-            var listItemCss = {width: width, height: height};
+            var containerCss = {position: "relative", overflow: "hidden", width: "100%", height: height};
+            var listCss = {position: "relative", padding: "0", margin: "0", listStyle: "none", width: pages.length * 100 + "%"};
+            var listItemCss = {width: "100%", height: height};
 
             var container = $("<div>").css(containerCss);
             var list = $("<ul>").css(listCss);
 
             var currentPage = 1, start, stop;
             if (settings.direction.toLowerCase() === "horizontal") {
-                list.css({float: "left"});
+                list.css({float: "left", height: "100%"});
 
                 var maxPageHeight = 0;
                 $.each(pages, function(i) {
                     var li = $("<li>")
-                            .css($.extend(listItemCss, {float: "left"}))
+                            .css($.extend(listItemCss, {float: "left", width: 100 / pages.length + "%", height: "100%"}))
                             .html($(this).html());
                     list.append(li);
                     
-                    //Amin hack
                     var pageHeight = $(this).height();
                     if(pageHeight > maxPageHeight)
                          maxPageHeight = pageHeight;
@@ -86,7 +85,7 @@
                                 list.animate({ left: "+=" + dragDelta()}, settings.duration);
                                 return;
                             }
-                            var new_width = -1 * width * currentPage;
+                            var new_width = -1 * list.parent().width() * currentPage;
                             list.animate({ left: new_width}, settings.duration);
                             currentPage++;
                         }
@@ -96,17 +95,13 @@
                                 list.animate({ left: "-=" + dragDelta()}, settings.duration);
                                 return;
                             }
-                            var new_width = -1 * width * (currentPage - 1);
-                            list.animate({ left: -1 * width * (currentPage - 2)}, settings.duration);
+                            var new_width = -1 * list.parent().width() * (currentPage - 2);
+                            list.animate({ left: new_width}, settings.duration);
                             currentPage--;
                         }
 
                         function dragDelta() {
                             return Math.abs(start.coords[0] - stop.coords[0]);
-                        }
-
-                        function adjustment() {
-                            return width - dragDelta();
                         }
 
                         settings.afterStop.apply(list, arguments);
@@ -164,10 +159,6 @@
 
                         function dragDelta() {
                             return Math.abs(start.coords[1] - stop.coords[1]);
-                        }
-
-                        function adjustment() {
-                            return height - dragDelta();
                         }
 
                         settings.afterStop.apply(list, arguments);
