@@ -58,6 +58,12 @@
                 });
                 container.css({height: maxPageHeight})
 
+                // Scroll back to the correct item if browser size or mobile orientation changes.
+                $(window).resize(function() {
+                  var new_width = -1 * list.parent().width() * (currentPage - 1);
+                  list.animate({ left: new_width}, settings.duration);
+                })
+
                 list.draggable({
                     axis: "x",
                     start: function(event) {
