@@ -34,29 +34,23 @@
             var height = originalList.parent().height();
 
             //Css
-            var containerCss = {position: "relative", overflow: "hidden", width: "100%", height: height};
-            var listCss = {position: "relative", padding: "0", margin: "0", listStyle: "none", width: pages.length * 100 + "%"};
-            var listItemCss = {width: "100%", height: height};
+            var containerCss = {position: "relative", overflow: "hidden", width: "100%"};
+            var listCss = {position: "relative", padding: "0", margin: "0", listStyle: "none"};
+            var listItemCss = {width: "100%"};
 
             var container = $("<div>").css(containerCss);
             var list = $("<ul>").css(listCss);
 
             var currentPage = 1, start, stop;
             if (settings.direction.toLowerCase() === "horizontal") {
-                list.css({float: "left", height: "100%"});
+                list.css({float: "left", width: pages.length * 100 + "%"});
 
-                var maxPageHeight = 0;
                 $.each(pages, function(i) {
                     var li = $("<li>")
-                            .css($.extend(listItemCss, {float: "left", width: 100 / pages.length + "%", height: "100%"}))
+                            .css($.extend(listItemCss, {float: "left", width: 100 / pages.length + "%"}))
                             .html($(this).html());
                     list.append(li);
-                    
-                    var pageHeight = $(this).height();
-                    if(pageHeight > maxPageHeight)
-                         maxPageHeight = pageHeight;
                 });
-                container.css({height: maxPageHeight})
 
                 // Scroll back to the correct item if browser size or mobile orientation changes.
                 $(window).resize(function() {
@@ -114,9 +108,12 @@
                     }
                 });
             } else if (settings.direction.toLowerCase() === "vertical") {
+                container.css({height: height})
+                
                 $.each(pages, function(i) {
                     var li = $("<li>")
                             .css(listItemCss)
+                            .css({height: height})
                             .html($(this).html());
                     list.append(li);
                 });

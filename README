@@ -13,6 +13,9 @@ https://github.com/furf/jquery-ui-touch-punch/
 
 
 <Fixes by="Amin Ariana in this fork">
++ on May 29, 2012:
+1. Cleaned up much of the horizontal Carousel's inline CSS to be implicitly handled by the browser and DOM inheritance. The result is that the height of the Carousel is dynamically readjusted when the mobile orientation changes.
+
 + on May 28, 2012:
 1. Fixed the problem where readjusting browser size on web or changing Mobile orientation would destroy the look of the Carousel. Completely overhauled the way Horizontal Carousel deals with calculating the width and height of items so that no fixed inline styles are used. Everything is either handled as percentages or calculated in real-time during jQuery event-handling. The result is that the Carousel will self-adjust when the width of the parent (or browser) changes, both in Mobile and on the Web.
 2. Fixed the problem of the Carousel forgetting which item was in the view when orientation of the mobile phone or the size of the browser changed. This workaround is rather hacky because jQuery Draggable deals with pixels, not percentages, so I couldn't rely on CSS to get it right. Instead a resize handler detects and fixes the problem.
