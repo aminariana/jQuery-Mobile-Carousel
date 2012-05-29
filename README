@@ -1,10 +1,16 @@
+About this:
+This is a fork of the jQuery Mobile Carousel project by BlackDynamo. I found it last updated in 2010. I desperately needed to use it in a Mobile project. While it was the best free (MIT license) touch-enabled image carousel I found out there, there were a number of issues, particularly in Mobile, that I needed to improve upon to make it completely acceptable where I needed to use it. A list of the fixes I've made follow.
+
+Original Demo: http://jsfiddle.net/blackdynamo/yxhzU/
+
+
+<Dependencies>
 Original, now alternative: You must use the jquery.ui.ipad.js plugin in order for jQuery UI widgets to recognize mobile touch events as click events.
 
 + Added by Amin Ariana: I have tested this code with jQuery Touch Punch and jQuery Mobile, and it works well. No need for the above ipad.js. Before my fork, it didn't work stably on Touch devices, and it had a strange height problem, and I've tried to improve on both of those issues. It's working correctly in iOS emulator and Android OS 2 and 4. Make sure you have the latest version of both above dependencies. The former depends on jQuery UI core:
 https://github.com/furf/jquery-ui-touch-punch/
+</Dependencies>
 
-
-Original Demo: http://jsfiddle.net/blackdynamo/yxhzU/
 
 <Fixes by="Amin Ariana in this fork">
 + on May 28, 2012:
@@ -18,8 +24,7 @@ Note: I did not fix this for vertical swiping, and may do that later.
 </Fixes>
 
 
-Available options:
-
+<Options>
 duration: this is the number of milliseconds for the slide transition to happen.
 direction: whether the carousel is a "horizontal" or "vertical" carousel.
 minimumDrag: this is the minimum distance the carousel has to be dragged in order to trigger the page change.
@@ -27,3 +32,4 @@ beforeStart: callback that will be called right as the drag event is triggered. 
 afterStart: callback that will be called right after the start event is triggered. "this" = the jQuery(list)
 beforeStop: callback that will be called right as the drag has stopped. "this" = the jQuery(list)
 beforeStart: callback that will be called right after the drag has stopped. "this" = the jQuery(list)
+</Options>
