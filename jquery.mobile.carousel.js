@@ -87,14 +87,14 @@
                             if (currentPage !== pages.length && isDragIntended())
                                 currentPage++;
                             
-                            list.animate({ left: getPageLeft(currentPage) }, settings.duration);
+                            list.stop().animate({ left: getPageLeft(currentPage) }, settings.duration);
                         }
 
                         function moveRight() {
                             if (currentPage !== 1 && isDragIntended())
                                 currentPage--;
 
-                            list.animate({ left: getPageLeft(currentPage)}, settings.duration);
+                            list.stop().animate({ left: getPageLeft(currentPage)}, settings.duration);
                         }
 
                         function isDragIntended() {
