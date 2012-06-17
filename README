@@ -13,6 +13,10 @@ https://github.com/furf/jquery-ui-touch-punch/
 
 
 <Fixes by="Amin Ariana in this fork">
++ on June 17, 2012:
+1. Fixed horizontal offset problem where if you swipe all the way to the end or beginning on a mobile phone, the carousel falls off of its snapped position on the screen and looks like it's snapping with some offset.
+2. New functionality: In horizontal swiping, multiple quick swiping gestures are now animated blazingly fast by dequeueing the animation queue. So if you skip 3 items using 3 quick gestures, you'll jump ahead to the 4th item.
+
 + on May 29, 2012:
 1. Cleaned up much of the horizontal Carousel's inline CSS to be implicitly handled by the browser and DOM inheritance. The result is that the height of the Carousel is dynamically readjusted when the mobile orientation changes.
 
