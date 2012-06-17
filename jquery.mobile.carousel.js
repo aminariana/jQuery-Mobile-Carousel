@@ -46,16 +46,19 @@
                 list.css({float: "left", width: pages.length * 100 + "%"});
 
                 $.each(pages, function(i) {
-                    var li = $("<li>")
-                            .css($.extend(listItemCss, {float: "left", width: 100 / pages.length + "%"}))
-                            .html($(this).html());
-                    list.append(li);
+                    $("<li>")
+                      .css($.extend(listItemCss, {float: "left", width: 100 / pages.length + "%"}))
+                      .html($(this).html())
+                      .appendTo(list);
                 });
+
+                function getPageLeft(page) {
+                    return -1 * list.parent().width() * (page - 1);
+                }
 
                 // Scroll back to the correct item if browser size or mobile orientation changes.
                 $(window).resize(function() {
-                  var new_width = -1 * list.parent().width() * (currentPage - 1);
-                  list.animate({ left: new_width}, settings.duration);
+                  list.stop().animate({ left: getPageLeft(currentPage) }, settings.duration);
                 })
 
                 list.draggable({
@@ -81,23 +84,21 @@
                         start.coords[0] > stop.coords[0] ? moveLeft() : moveRight();
 
                         function moveLeft() {
-                            if (currentPage === pages.length || dragDelta() < settings.minimumDrag) {
-                                list.animate({ left: "+=" + dragDelta()}, settings.duration);
-                                return;
-                            }
-                            var new_width = -1 * list.parent().width() * currentPage;
-                            list.animate({ left: new_width}, settings.duration);
-                            currentPage++;
+                            if (currentPage !== pages.length && isDragIntended())
+                                currentPage++;
+                            
+                            list.animate({ left: getPageLeft(currentPage) }, settings.duration);
                         }
 
                         function moveRight() {
-                            if (currentPage === 1 || dragDelta() < settings.minimumDrag) {
-                                list.animate({ left: "-=" + dragDelta()}, settings.duration);
-                                return;
-                            }
-                            var new_width = -1 * list.parent().width() * (currentPage - 2);
-                            list.animate({ left: new_width}, settings.duration);
-                            currentPage--;
+                            if (currentPage !== 1 && isDragIntended())
+                                currentPage--;
+
+                            list.animate({ left: getPageLeft(currentPage)}, settings.duration);
+                        }
+
+                        function isDragIntended() {
+                            return dragDelta() >= settings.minimumDrag;
                         }
 
                         function dragDelta() {
