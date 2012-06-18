@@ -52,7 +52,7 @@
 
       $.each(pages, function(i) {
         $("<li>")
-          .css({float: "left", width: 100 / pages.length + "%"})
+          .css({float: "left", width: originalList.parent().width() + "px" })
           .html($(this).html())
           .appendTo(list);
       });
@@ -114,6 +114,7 @@
 
       // Scroll back to the correct item if browser size or mobile orientation changes.
       $(window).resize(function() {
+        list.children().css({width: list.parent().width() })
         animateToPage(currentPage);
       });
 
